@@ -57,7 +57,9 @@ class _HomePageState extends State<HomePage> {
                   hintText: "Selecciona la fecha",
                   // isNumber: false,
                   isDatePicket: true,
-                  onTap: showDateTimePicker(),
+                  onTap: () {
+                    showDateTimePicker();
+                  },
                 ),
                 SizedBox(
                   height: 20,
