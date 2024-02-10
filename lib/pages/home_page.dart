@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gastosapp/modals/register_form_modal.dart';
-import 'package:gastosapp/utils/data_general.dart';
 import 'package:gastosapp/widgets/item_gasto_widget.dart';
-import 'package:gastosapp/widgets/item_type_widget.dart';
 import 'package:gastosapp/widgets/textfield_normal_widget.dart';
-import 'package:intl/intl.dart';
 
 class HomePage extends StatefulWidget {
   @override
