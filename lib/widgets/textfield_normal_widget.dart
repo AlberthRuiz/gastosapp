@@ -1,13 +1,28 @@
 import 'package:flutter/material.dart';
 
-class TextFieldNormal extends StatelessWidget {
+class TextFieldNormalWidget extends StatelessWidget {
+  String hintText;
+  bool isNumber = false;
+  bool isDatePicket = false;
+  VoidCallback? onTap;
+  TextFieldNormalWidget({
+    required this.hintText,
+    this.isNumber = false,
+    this.isDatePicket = false,
+    this.onTap,
+  });
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: const EdgeInsets.symmetric(vertical: 4),
       child: TextField(
+        // enabled: true,
+        readOnly: isDatePicket,
+        onTap: onTap,
+        keyboardType: isNumber ? TextInputType.number : TextInputType.text,
         decoration: InputDecoration(
-          hintText: "Buscar por título",
+          hintText: hintText,
           hintStyle: TextStyle(
             fontSize: 14,
             color: Colors.black.withOpacity(0.40),

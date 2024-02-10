@@ -8,6 +8,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  showDateTimePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2030),
+    );
+  }
+
   showModalRegister() {
     showModalBottomSheet(
       isScrollControlled: true,
@@ -15,12 +24,11 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (BuildContext context) {
         return Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
           child: Container(
-            padding: EdgeInsets.all(20),
-            height: 350,
-            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(24),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -32,13 +40,25 @@ class _HomePageState extends State<HomePage> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  "Registrar Salida",
-                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
+                  "Registrar salida",
+                  style: TextStyle(fontWeight: FontWeight.w700, fontSize: 16),
                 ),
                 Divider(),
-                TextFieldNormal(),
-                TextFieldNormal(),
-                TextFieldNormal(),
+                TextFieldNormalWidget(
+                  hintText: "Ingresa un título",
+                  // isDatePicket: false,
+                ),
+                TextFieldNormalWidget(
+                  hintText: "Ingresa el precio",
+                  isNumber: true,
+                  // isDatePicket: false,
+                ),
+                TextFieldNormalWidget(
+                  hintText: "Selecciona la fecha",
+                  // isNumber: false,
+                  isDatePicket: true,
+                  onTap: showDateTimePicker(),
+                ),
                 SizedBox(
                   height: 20,
                 ),
@@ -47,20 +67,19 @@ class _HomePageState extends State<HomePage> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xff101321),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16))),
+                      backgroundColor: Color(0xff101321),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16.0),
+                      ),
+                    ),
                     onPressed: () {},
                     child: Text(
                       "Agregar",
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                      ),
+                          fontWeight: FontWeight.bold, color: Colors.white),
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),
@@ -80,8 +99,8 @@ class _HomePageState extends State<HomePage> {
               children: [
                 GestureDetector(
                   onTap: () {
-                    showModalRegister();
                     print("presionado");
+                    showModalRegister();
                   },
                   child: Container(
                     alignment: Alignment.bottomCenter,
@@ -147,7 +166,9 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Padding(
                               padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: TextFieldNormal(),
+                              child: TextFieldNormalWidget(
+                                hintText: "Buscar por título",
+                              ),
                             ),
                             ItemGastoWidget(),
                             ItemGastoWidget(),
