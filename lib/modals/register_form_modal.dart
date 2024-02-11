@@ -13,7 +13,6 @@ class Registermodal extends StatefulWidget {
 
 class _RegistermodalState extends State<Registermodal> {
   TextEditingController _titleController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
   TextEditingController _priceController = TextEditingController();
   TextEditingController _dateController = TextEditingController();
   String? typeSelected;
