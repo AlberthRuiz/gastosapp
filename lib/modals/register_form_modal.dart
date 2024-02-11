@@ -124,7 +124,28 @@ class _RegistermodalState extends State<Registermodal> {
                   title: _titleController.text,
                   type: typeSelected ?? "",
                 );
-                DBAdmin().insertarGastos(gastoModel);
+                DBAdmin().insertarGastos(gastoModel).then((value) {
+                  if (value > 0) {
+                    // inserto correctamente.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: Colors.cyan,
+                        behavior: SnackBarBehavior.floating,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        content: Text(
+                          "Se registro correctamente",
+                        ),
+                      ),
+                    );
+                    Navigator.pop(context);
+                  } else {
+                    // poner algun mensaje para indicar no se inserto
+                  }
+                }).catchError((error) {
+                  print(error);
+                });
               },
               child: Text(
                 "Agregar",

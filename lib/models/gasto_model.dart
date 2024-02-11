@@ -12,4 +12,11 @@ class GastoModel {
     required this.datetime,
     required this.type,
   });
+
+  Map<String, dynamic> convertirAMapa() => {
+        "title": title,
+        "price": price,
+        "datetime": datetime,
+        "type": type,
+      };
 }
