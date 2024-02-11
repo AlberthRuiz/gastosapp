@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gastosapp/db/db_admin.dart';
+import 'package:gastosapp/models/gasto_model.dart';
 import 'package:gastosapp/utils/data_general.dart';
 import 'package:gastosapp/widgets/item_type_widget.dart';
 import 'package:gastosapp/widgets/textfield_normal_widget.dart';
@@ -115,7 +117,15 @@ class _RegistermodalState extends State<Registermodal> {
                   borderRadius: BorderRadius.circular(16.0),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                GastoModel gastoModel = GastoModel(
+                  datetime: _dateController.text,
+                  price: double.parse(_priceController.text),
+                  title: _titleController.text,
+                  type: typeSelected ?? "",
+                );
+                DBAdmin().insertarGastos(gastoModel);
+              },
               child: Text(
                 "Agregar",
                 style:

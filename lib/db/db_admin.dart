@@ -1,11 +1,20 @@
 import 'dart:io';
 
+import 'package:gastosapp/models/gasto_model.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 
 class DBAdmin {
   Database? myDatabase;
+
+  static final DBAdmin pepe = DBAdmin.mandarina();
+
+  DBAdmin.mandarina();
+
+  factory DBAdmin() {
+    return pepe;
+  }
 
   Future<Database?> checkDatabase() async {
     myDatabase ??= await initDatabase();
@@ -35,7 +44,17 @@ class DBAdmin {
 
   obtenerGastos() async {
     Database? db = await checkDatabase();
-    List data = await db!.query("select * from GASTOS");
+    List data = await db!.query("GASTOS");
     print(data);
+  }
+
+  insertarGastos(GastoModel gastoModel) async {
+    Database? db = await checkDatabase();
+    db!.insert("GASTOS", {
+      "title": gastoModel.title,
+      "price": gastoModel.price,
+      "datetime": gastoModel.datetime,
+      "type": gastoModel.type
+    });
   }
 }
