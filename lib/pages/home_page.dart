@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gastosapp/db/db_admin.dart';
 import 'package:gastosapp/modals/register_form_modal.dart';
+import 'package:gastosapp/models/gasto_model.dart';
 import 'package:gastosapp/widgets/item_gasto_widget.dart';
 import 'package:gastosapp/widgets/textfield_normal_widget.dart';
 
@@ -27,8 +28,20 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  List<GastoModel> gastosList = [];
+  Future<void> getDataGeneral() async {
+    gastosList = await DBAdmin().obtenerGastos();
+  }
+
+  @override
+  void initState() {
+    getDataGeneral();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(gastosList);
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -111,14 +124,14 @@ class _HomePageState extends State<HomePage> {
                                 hintText: "Buscar por título",
                               ),
                             ),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
-                            ItemGastoWidget(),
+                            ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: gastosList.length,
+                              itemBuilder: (BuildContext context, index) {
+                                return ItemGastoWidget(data: gastosList[index]);
+                              },
+                            ),
                           ],
                         ),
                       ),

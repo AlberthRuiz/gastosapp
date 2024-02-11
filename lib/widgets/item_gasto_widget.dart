@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gastosapp/models/gasto_model.dart';
 
 class ItemGastoWidget extends StatelessWidget {
-  const ItemGastoWidget({super.key});
+  GastoModel data;
+  ItemGastoWidget({required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +22,7 @@ class ItemGastoWidget extends StatelessWidget {
           data: MediaQuery.of(context)
               .copyWith(textScaler: TextScaler.linear(0.8)),
           child: Text(
-            "Compras en el super",
+            data.title,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
@@ -28,14 +30,14 @@ class ItemGastoWidget extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          "09/02/2024 22:21",
+          data.datetime,
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w400,
           ),
         ),
         trailing: Text(
-          "S/ 402.00",
+          "S/. ${data.price.toString()}",
           style: TextStyle(
             fontSize: 15,
             fontWeight: FontWeight.w700,

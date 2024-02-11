@@ -42,21 +42,18 @@ class DBAdmin {
     );
   }
 
-  obtenerGastos() async {
+  Future<List<GastoModel>> obtenerGastos() async {
     Database? db = await checkDatabase();
-    List data = await db!.query("GASTOS");
+    List<Map<String, dynamic>> data = await db!.query("GASTOS");
     print(data);
+    List<GastoModel> gastoLista =
+        data.map((e) => GastoModel.convertirDeMapaAModelo(e)).toList();
+    return gastoLista;
   }
 
   Future<int> insertarGastos(GastoModel gastoModel) async {
     Database? db = await checkDatabase();
     int resp = await db!.insert("GASTOS", gastoModel.convertirAMapa());
-    // {
-    //   "title": gastoModel.title,
-    //   "price": gastoModel.price,
-    //   "datetime": gastoModel.datetime,
-    //   "type": gastoModel.type
-    // });
     return resp;
   }
 }

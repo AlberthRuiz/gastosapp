@@ -19,4 +19,12 @@ class GastoModel {
         "datetime": datetime,
         "type": type,
       };
+
+  factory GastoModel.convertirDeMapaAModelo(Map<String, dynamic> map) =>
+      GastoModel(
+        title: map["title"],
+        price: map["price"],
+        datetime: map["datetime"],
+        type: map["type"],
+      );
 }
