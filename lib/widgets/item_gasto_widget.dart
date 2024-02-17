@@ -7,6 +7,7 @@ class ItemGastoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(data.type);
     return Container(
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
@@ -14,7 +15,7 @@ class ItemGastoWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(16)),
       child: ListTile(
         leading: Image.asset(
-          "assets/icons/alimentos.png",
+          "assets/icons/${data.type.contains("seguros") ? "bancos" : data.type.toLowerCase()}.png",
           width: 50,
           height: 50,
         ),

@@ -56,4 +56,17 @@ class DBAdmin {
     int resp = await db!.insert("GASTOS", gastoModel.convertirAMapa());
     return resp;
   }
+
+  Future<int> updGasto(GastoModel gastoModel) async {
+    Database? db = await checkDatabase();
+    int resp = await db!.update("GASTOS", gastoModel.convertirAMapa(),
+        where: "id=${gastoModel.id}");
+    return resp;
+  }
+
+  Future<int> delGasto(int id) async {
+    Database? db = await checkDatabase();
+    int resp = await db!.delete("GASTOS", where: "id=${id}");
+    return resp;
+  }
 }
